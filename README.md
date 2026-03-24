@@ -53,15 +53,7 @@ A web-based task management application built with PHP and MySQL, designed to he
 4. **Employee Features**:
    - View and update assigned tasks.
    - Manage personal profile.
-## Login Credentials:
-**Default Admin User:**
-   - Username: admin.
-   - Password: 123.
-   
-**Default Employee User:**
-   - Username: raven.
-   - Password: 123.
-   
+
 ## Database Schema
 
 - **users**: Stores user information (id, fullname, username, password, role, created_at)
