@@ -8,6 +8,9 @@ if(isset($_SESSION['role']) && isset($_SESSION['id'])){
 	if($_SESSION['role'] == "admin"){
 		$due_today_tasks = get_tasks_due_today($conn);
 		$num_of_due_today_tasks = count_tasks($due_today_tasks);
+
+		$due_month_tasks = get_tasks_due_this_month($conn);
+		$num_of_due_this_month_tasks = count_tasks($due_month_tasks);
 		
 		$unassigned_tasks = get_unassigned_tasks($conn);
 		$num_of_unassigned_tasks = count_tasks($unassigned_tasks);
@@ -67,7 +70,7 @@ if(isset($_SESSION['role']) && isset($_SESSION['id'])){
 		<section class="section-1">
 		<?php
 		if($_SESSION['role'] == "admin"){ ?>
-			<div class= "dashboard">
+			<div class= "dashboard-admin">
 				<div class="dashboard-item">
 					<i class="fa fa-users"></i>
 					<span><?php echo $num_of_users; ?> Employee</span>
@@ -79,6 +82,10 @@ if(isset($_SESSION['role']) && isset($_SESSION['id'])){
 				<div class="dashboard-item">
 					<i class="fa fa-exclamation-triangle"></i>
 					<span><?php echo $num_of_due_today_tasks; ?> Due Today</span>
+				</div>
+				<div class="dashboard-item">
+					<i class="fa fa-exclamation-triangle"></i>
+					<span><?php echo $num_of_due_this_month_tasks; ?> Due This Month</span>
 				</div>
 				<div class="dashboard-item">
 					<i class="fa fa-window-close"></i>
@@ -104,15 +111,11 @@ if(isset($_SESSION['role']) && isset($_SESSION['id'])){
 					<i class="fa fa-check-square-o"></i>
 					<span><?php echo $completed; ?> Completed</span>
 				</div>
-				<div class="dashboard-item">
-					<i class="fa fa-bell"></i>
-					<span>1 Notification</span>
-				</div>
 			</div>
 		
 			
 		<?php } else {?>
-			<div class= "dashboard">
+			<div class= "dashboard-emp">
 				<div class="dashboard-item">
 					<i class="fa fa-tasks"></i>
 					<span><?php echo $num_of_mytasks; ?> My Tasks</span>
@@ -144,10 +147,6 @@ if(isset($_SESSION['role']) && isset($_SESSION['id'])){
 				<div class="dashboard-item">
 					<i class="fa fa-check-square-o"></i>
 					<span><?php echo $completed_mytasks; ?> Completed</span>
-				</div>
-				<div class="dashboard-item">
-					<i class="fa fa-bell"></i>
-					<span>1 Notification</span>
 				</div>
 			</div>
 
