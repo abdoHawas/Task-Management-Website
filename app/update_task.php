@@ -30,9 +30,12 @@ if(isset($_POST['id']) && isset($_POST['title']) && isset($_POST['description'])
         header("Location: ../edit-task.php?error=$temp&id=$id");
         exit();
     }else {
-        include "model/task.php";
+        include "model/Task.php";
+        include "model/Notification.php";
         $data = array($title, $description, $assigned_to, $due_date, $id);
         update_task($conn, $data);
+        $notification_data = array("'$title' has been assigned to you. please check your tasks.", $assigned_to, "Task Update", date("Y-m-d"));
+        insert_notification($conn, $notification_data);
         $temp = "Task updated successfully";
         header("Location: ../edit-task.php?success=$temp&id=$id");
         exit();
